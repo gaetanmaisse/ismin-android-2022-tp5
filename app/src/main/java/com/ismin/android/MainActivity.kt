@@ -1,4 +1,4 @@
-package com.ismin.androidtp2
+package com.ismin.android
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
