@@ -4,12 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
 
-        findViewById<Button>(R.id.a_main_btn_create_book).setOnClickListener {
+        findViewById<FloatingActionButton>(R.id.a_main_btn_create_book).setOnClickListener {
             val intent = Intent(this, CreateBookActivity::class.java)
             startForResult.launch(intent)
         }
