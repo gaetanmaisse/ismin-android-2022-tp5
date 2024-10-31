@@ -2,24 +2,32 @@ package com.ismin.android
 
 
 class Bookshelf {
-    private val bookshelf: MutableMap<String, Book> = mutableMapOf()
+    private val storage = HashMap<String, Book>()
 
     fun addBook(book: Book) {
-        this.bookshelf[book.isbn] = book
+        storage[book.isbn] = book
     }
 
     fun getBook(isbn: String): Book {
-        return bookshelf[isbn] ?: throw Exception("Book not found")
+        return storage[isbn] ?: throw Exception("Book not found")
+    }
+
+    fun getAllBooks(): List<Book> {
+        return storage.values
+            .sortedBy { book -> book.title }
     }
 
     fun getBooksOf(author: String): List<Book> {
-        // Map -> Map -> List
-       return this.bookshelf.filterValues { it.author == author }.values.sortedBy { it.title }
+        return storage.filterValues { book -> book.author.equals(author) }
+            .values
+            .sortedBy { book -> book.title }
     }
 
-    fun getAllBooks(): List<Book> =
-        this.bookshelf.values.sortedBy { it.title }
+    fun getTotalNumberOfBooks(): Int {
+        return storage.size
+    }
 
-    fun getTotalNumberOfBooks(): Int = this.bookshelf.size
-
+    fun clear() {
+        storage.clear()
+    }
 }

@@ -2,6 +2,8 @@ package com.ismin.android
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -58,5 +60,21 @@ class MainActivity : AppCompatActivity() {
         )
         bookshelf.addBook(Book("978-2070413119", "1984", "George Orwell", "1949-06-08"))
         bookshelf.addBook(Book("978-2070368229", "Fahrenheit 451", "Ray Bradbury", "1953-10-01"))
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.action_delete -> {
+                bookshelf.clear()
+                bookAdapter.updateBooks(bookshelf.getAllBooks())
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
