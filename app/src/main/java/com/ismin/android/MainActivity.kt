@@ -1,24 +1,19 @@
 package com.ismin.android
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.result.contract.ActivityResultContracts
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), BookCreator {
 
     private val bookshelf = Bookshelf()
 
-    private val startForResult =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            if (it.resultCode == RESULT_OK) {
-                val book = it.data?.getSerializableExtra(CREATED_BOOK) as Book
-                bookshelf.addBook(book)
-            }
-        }
+    private val btnCreateBook: FloatingActionButton by lazy {
+        findViewById(R.id.a_main_btn_create_book)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,9 +23,8 @@ class MainActivity : AppCompatActivity() {
 
         displayBookListFragment()
 
-        findViewById<FloatingActionButton>(R.id.a_main_btn_create_book).setOnClickListener {
-            val intent = Intent(this, CreateBookActivity::class.java)
-            startForResult.launch(intent)
+        btnCreateBook.setOnClickListener {
+            displayCreateBookFragment()
         }
     }
 
@@ -39,6 +33,15 @@ class MainActivity : AppCompatActivity() {
         val bookListFragment = BookListFragment.newInstance(bookshelf.getAllBooks())
         fragmentTransaction.replace(R.id.a_main_lyt_container, bookListFragment)
         fragmentTransaction.commit()
+        btnCreateBook.visibility = View.VISIBLE
+    }
+
+    private fun displayCreateBookFragment() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val createBookFragment = CreateBookFragment()
+        fragmentTransaction.replace(R.id.a_main_lyt_container, createBookFragment)
+        fragmentTransaction.commit()
+        btnCreateBook.visibility = View.GONE
     }
 
     private fun initData() {
@@ -60,12 +63,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId) {
+        return when (item.itemId) {
             R.id.action_delete -> {
                 bookshelf.clear()
+                displayBookListFragment()
                 true
             }
+
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onBookCreated(book: Book) {
+        bookshelf.addBook(book)
+        displayBookListFragment()
     }
 }

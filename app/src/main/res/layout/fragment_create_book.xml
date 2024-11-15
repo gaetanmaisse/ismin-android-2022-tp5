@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".CreateBookActivity">
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/a_create_book_lyt"
+        android:id="@+id/f_create_book_lyt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -18,39 +15,39 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/a_create_book_edt_isbn"
+            android:id="@+id/f_create_book_edt_isbn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
-            android:hint="@string/isbn" />
+            android:hint="@string/isbn"
+            android:inputType="text" />
 
         <EditText
-            android:id="@+id/a_create_book_edt_title"
+            android:id="@+id/f_create_book_edt_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
-            android:hint="@string/title" />
+            android:hint="@string/title"
+            android:inputType="text" />
 
         <EditText
-            android:id="@+id/a_create_book_edt_author"
+            android:id="@+id/f_create_book_edt_author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
-            android:hint="@string/author" />
+            android:hint="@string/author"
+            android:inputType="text" />
 
         <EditText
-            android:id="@+id/a_create_book_edt_date"
+            android:id="@+id/f_create_book_edt_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="date"
-            android:hint="@string/date"/>
+            android:hint="@string/date"
+            android:inputType="date" />
 
         <Button
-            android:id="@+id/a_create_book_btn_save"
+            android:id="@+id/f_create_book_btn_save"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/save" />
